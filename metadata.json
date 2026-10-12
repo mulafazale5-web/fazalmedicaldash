@@ -1,0 +1,6 @@
+{
+  "name": "MGICare Hospitals",
+  "description": "Modern multi-specialty healthcare system featuring expert doctors, cutting-edge departments, and online appointment booking.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

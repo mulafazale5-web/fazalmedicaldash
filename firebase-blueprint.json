@@ -1,0 +1,53 @@
+{
+  "entities": {
+    "User": {
+      "title": "User Profile",
+      "description": "Patient user account profile data",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "Firebase Auth UID" },
+        "email": { "type": "string", "format": "email", "description": "User email address" },
+        "displayName": { "type": "string", "description": "Full name of the user" },
+        "phone": { "type": "string", "description": "Primary contact number" },
+        "createdAt": { "type": "string", "description": "Account registration timestamp" }
+      },
+      "required": ["uid", "email", "displayName"]
+    },
+    "Appointment": {
+      "title": "Appointment",
+      "description": "Medical appointment booking record",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "description": "UID of the booking user" },
+        "referenceNumber": { "type": "string", "description": "Unique booking reference ID" },
+        "patientName": { "type": "string", "description": "Patient full name" },
+        "patientEmail": { "type": "string", "format": "email", "description": "Patient contact email" },
+        "patientPhone": { "type": "string", "description": "Patient contact phone" },
+        "patientAge": { "type": "number", "description": "Patient age in years" },
+        "patientGender": { "type": "string", "enum": ["male", "female", "other"], "description": "Patient gender" },
+        "departmentId": { "type": "string", "description": "Medical department ID" },
+        "departmentName": { "type": "string", "description": "Department name" },
+        "doctorId": { "type": "string", "description": "Consultant doctor ID" },
+        "doctorName": { "type": "string", "description": "Attending doctor name" },
+        "doctorRole": { "type": "string", "description": "Doctor specialty role" },
+        "date": { "type": "string", "description": "Appointment date YYYY-MM-DD" },
+        "timeSlot": { "type": "string", "description": "Consultation time slot" },
+        "visitType": { "type": "string", "enum": ["first_visit", "follow_up", "second_opinion"], "description": "Type of hospital consultation" },
+        "symptoms": { "type": "string", "description": "Reason for consultation or symptoms" },
+        "status": { "type": "string", "enum": ["confirmed", "rescheduled", "cancelled"], "description": "Current status of appointment" },
+        "createdAt": { "type": "string", "description": "Booking creation timestamp" }
+      },
+      "required": ["userId", "referenceNumber", "patientName", "patientEmail", "patientPhone", "doctorId", "date", "timeSlot", "status"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/User" },
+      "description": "User profiles stored by Firebase Auth UID"
+    },
+    "/appointments/{appointmentId}": {
+      "schema": { "$ref": "#/entities/Appointment" },
+      "description": "Hospital appointment bookings across all patients"
+    }
+  }
+}
